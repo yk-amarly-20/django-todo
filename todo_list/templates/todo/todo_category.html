@@ -1,0 +1,13 @@
+<!-- cateogryで絞り込んだtodoを表示 -->
+<h1> {{category}} による絞り込み </h1>
+<ul>
+{% for todo in todo_list %}
+  <li> {{todo}} : 
+  {% for category in todo.category.all %}
+    {{category}}
+  {% endfor %} 
+  </li>
+{% empty %}
+<p> {{category}}からの絞り込みは存在しません </p>
+{% endfor %}
+</ul>

@@ -1,0 +1,25 @@
+<!-- 全todoを表示 -->
+
+<ul>
+  {% for todo in todolist %}
+  <li> 
+  {{ todo }} : 
+    {% for category in todo.category.all %}
+      {{ category }}
+    {% empty %}
+      カテゴリは設定されていません
+    {% endfor %}
+
+    このtodoは{{todo.dead_line}}までです
+    <form method="post" action="{% url 'todo_list:delete' todo.id %}">
+      {% csrf_token %}
+      <input type="submit" value="削除">
+    </form>
+    
+    
+  </li>
+  {% empty %}
+  <li>todoはありません</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'todo_list:category' %}">カテゴリから絞り込む</a>
