@@ -15,6 +15,8 @@
       {% csrf_token %}
       <input type="submit" value="削除">
     </form>
+
+
     
     
   </li>
@@ -23,3 +25,4 @@
   {% endfor %}
 </ul>
 <a href="{% url 'todo_list:category' %}">カテゴリから絞り込む</a>
+<a href="{% url 'todo_list:add' %}">新規追加</a>
