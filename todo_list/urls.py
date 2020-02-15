@@ -9,4 +9,5 @@ urlpatterns = [
     path('category', views.show_category, name='category'),  # カテゴリから絞りこみ
     path('category/<str:category_name>', views.todo_category,
          name='todo_category'),  # 絞り込んだtodoを表示
+    path('add', views.add, name='add'),  # 新規に追加する
 ]

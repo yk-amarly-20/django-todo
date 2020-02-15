@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from todo_list.models import Category, Todo
+from .forms import AddTodo
 
 # Create your views here.
 
@@ -54,3 +55,29 @@ def todo_category(request, category_name):
 
     return render(request, 'todo/todo_category.html', {'todo_list': todo, 'category': category})
     # return render(request, 'todo/todo_category.html', {'todo_list': todo})
+
+
+def add(request):
+    """
+    フォームから受け取ったtodoを作成
+    """
+
+    form = AddTodo(request.POST or None)
+    if form.is_valid():
+        todo = Todo()
+        todo.title = form.cleaned_data['title']
+        todo.dead_line = form.cleaned_data['dead_line']
+        category = form.cleaned_data['category']
+
+        category = category.get()
+        print(type(category))
+        Todo.objects.create(
+            title=todo.title,
+            dead_line=todo.dead_line,
+            created_at=todo.created_at
+        )
+
+        todo.category.set(category)
+
+        return redirect('todo_list:index')
+    return render(request, 'todo/add.html', {'form': form})
