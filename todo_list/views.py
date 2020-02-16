@@ -65,19 +65,17 @@ def add(request):
     form = AddTodo(request.POST or None)
     if form.is_valid():
         todo = Todo()
-        todo.title = form.cleaned_data['title']
-        todo.dead_line = form.cleaned_data['dead_line']
-        category = form.cleaned_data['category']
+        title = form.cleaned_data['title']
+        dead_line = form.cleaned_data['dead_line']
+        categories = form.cleaned_data['category']
 
-        category = category.get()
-        print(type(category))
-        Todo.objects.create(
-            title=todo.title,
-            dead_line=todo.dead_line,
-            created_at=todo.created_at
+        todo = Todo.objects.create(
+            title=title,
+            dead_line=dead_line,
         )
 
-        todo.category.set(category)
+        for category in categories:
+            todo.category.add(category)
 
         return redirect('todo_list:index')
     return render(request, 'todo/add.html', {'form': form})
