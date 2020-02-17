@@ -1,8 +1,13 @@
+{% extends 'todo/base.html' %}
+{% block content %}
 <!-- カテゴリ一覧を表示 -->
-<ul>
+<h1 class="category-title">カテゴリ検索</h1>
+<p class="choice">カテゴリを選んでください</p>
+<ul style="list-style:none">
 {% for category in categories %}
 <li>
   <a href="{% url 'todo_list:todo_category' category.title %}"> {{ category }} </a>
 </li>
 {% endfor %}
 </ul>
+{% endblock content %}

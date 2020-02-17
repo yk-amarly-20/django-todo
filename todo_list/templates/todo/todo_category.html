@@ -1,13 +1,57 @@
+{% extends 'todo/base.html' %}
+{% block content %}
 <!-- cateogryで絞り込んだtodoを表示 -->
-<h1> {{category}} による絞り込み </h1>
+<h1 class="category-title"> {{category}} による絞り込み </h1>
 <ul>
-{% for todo in todo_list %}
-  <li> {{todo}} : 
-  {% for category in todo.category.all %}
-    {{category}}
-  {% endfor %} 
-  </li>
-{% empty %}
-<p> {{category}}からの絞り込みは存在しません </p>
-{% endfor %}
-</ul>
+{% if todolist %}
+    <table border="2" class="table table-striped table-responsive table-original">
+    {% for todo in todolist %}
+      <tr>
+        <th class="todo">
+          {{ todo }}
+        </th>
+        <td>
+            {% for category in todo.category.all %}
+            <div class="category">
+              {{category}}
+            {% empty %}
+              カテゴリは設定されていません
+            </div>
+            {% endfor %}
+        </td>
+        <td>
+          このtodoは&nbsp;<span class="dead-line">{{ todo.dead_line|date:"y/n/j H:i" }}</span>&nbsp;までです
+        </td>
+        <td>
+        {% if todo.completed %}
+        <div class="complete">
+          completed!!
+        </div>
+        {% else %}
+        <div class="not-complete">
+          not completed...
+        </div>
+        {% endif %}
+        </td>
+        <td>
+          <div style="display:inline-flex">
+            <form method="post" action="{% url 'todo_list:delete' todo.id %}">
+              {% csrf_token %}
+              <input type="submit" value="削除" class="btn btn-danger btn-sm">
+            </form>
+            <form method="post" action="{% url 'todo_list:complete' todo.id %}">
+              {% csrf_token %}
+              <input type="submit" value="完了" class="btn btn-primary btn-sm">
+            </form>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+    <p> {{category}}による絞りこみはありません </p>
+  {% endif %}
+    <a href="{% url 'todo_list:category' %}">カテゴリから絞り込む</a>
+    <a href="{% url 'todo_list:add' %}">新規追加</a>
+
+  {% endblock %}

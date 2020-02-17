@@ -7,7 +7,7 @@ from django.utils import timezone
 
 class Category(models.Model):
     """
-  　　　　　　　　todoのカテゴリ
+  　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　todoのカテゴリ
     """
 
     title = models.CharField('タイトル', max_length=50)     # カテゴリーのタイトル
@@ -22,9 +22,10 @@ class Todo(models.Model):
     """
 
     title = models.CharField('タイトル', max_length=50)  # TODOのタイトル
-    dead_line = models.DateField('締め切り', default=timezone.now())
+    dead_line = models.DateTimeField('締め切り', default=timezone.now())
     created_at = models.DateTimeField('日付', auto_now_add=True)  # 投稿日時
     category = models.ManyToManyField(Category, blank=True)  # カテゴリとの連携
+    completed = models.BooleanField('completed', default=False)
 
     def __str__(self):
         return self.title

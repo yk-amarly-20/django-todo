@@ -1,0 +1,43 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+<!-- 新しいtodoを作成 -->
+<h1 class="add-todo-title">新規作成</h1>
+<p class="add-todo">新しいtodoを作成しましょう</p>
+<table>
+  <form method="post" action="">
+    {% csrf_token %}
+    <tbody>
+      <tr>
+        <th>
+          タイトル
+        </th>
+        <td>
+          {{form.title}}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          締め切り
+        </th>
+        <td>
+          {{form.dead_line}}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          カテゴリ
+        </th>
+        <td>
+          {{form.category}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <input type="submit" value="追加">
+        <input type="reset" value="リセット">
+        </td>
+      </tr>
+    </tbody>
+  </form>
+</table>
+{% endblock content %}
