@@ -2,7 +2,7 @@
   margin-top: 0;
   padding: 10px;
   font-size: 35px;
-  background-color:#00ffff;
+  background-color:#5b3911;
   color: #ffffff;
   text-align: center;
   box-shadow: 0 1px 8px #777;
@@ -10,25 +10,27 @@
 }
 
 .complete {
-  color: #ff0000;
+  color: #cd5e3c;
   font-weight: bold;
 }
 
 .not-complete {
-  color: #0000ff;
+  color: #008899;
   font-weight: bold;
 }
 
 .category {
   display: block;
+  color: #583822;
 }
 
 .todo {
   padding: 10px;
+  color: #583822;
 }
 
 .dead-line {
-  color: #ff00a4;
+  color: #cd5e3c;
 }
 
 .add-todo {
@@ -53,4 +55,16 @@
 
 .table-original {
   margin: 50px 0 0 0;
+}
+
+.sent-a {
+  color: #583822;
+}
+
+.href {
+  color: #cd5e3c;
+}
+
+.todo-body {
+  background-color: #fff5d1;
 }

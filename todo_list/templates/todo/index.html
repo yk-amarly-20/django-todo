@@ -4,7 +4,7 @@
   {% if messages %}
   <ul style="list-style:none">
     {% for message in messages %}
-      <li class="alert alert-success"> {{message}} </li>
+      <li class="alert alert-warning"> {{message}} </li>
     {% endfor %}
   </ul>
   {% endif %}
@@ -27,7 +27,7 @@
             {% endfor %}
         </td>
         <td>
-          このtodoは&nbsp;<span class="dead-line">{{ todo.dead_line|date:"y/n/j H:i" }}</span>&nbsp;までです
+          <span class="sent-a">このtodoは</span>&nbsp;<span class="dead-line">{{ todo.dead_line|date:"y/n/j H:i" }}</span>&nbsp;<span class="sent-a">までです</span>
         </td>
         <td>
         {% if todo.completed %}
@@ -44,11 +44,11 @@
           <div style="display:inline-flex">
             <form method="post" action="{% url 'todo_list:delete' todo.id %}">
               {% csrf_token %}
-              <input type="submit" value="削除" class="btn btn-danger btn-sm">
+              <input type="submit" value="削除" class="btn btn-warning btn-sm">
             </form>
             <form method="post" action="{% url 'todo_list:complete' todo.id %}">
               {% csrf_token %}
-              <input type="submit" value="完了" class="btn btn-primary btn-sm">
+              <input type="submit" value="完了" class="btn btn-info btn-sm">
             </form>
           </div>
         </td>
@@ -59,7 +59,7 @@
     <p>todoはありません</p>
   {% endif %}
 
-  <a href="{% url 'todo_list:category' %}">カテゴリから絞り込む</a>
-  <a href="{% url 'todo_list:add' %}">新規追加</a>
+  <a href="{% url 'todo_list:category' %}" class="href">カテゴリから絞り込む</a>
+  <a href="{% url 'todo_list:add' %}" class="href">新規追加</a>
 
 {% endblock %} 
