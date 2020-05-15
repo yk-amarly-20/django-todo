@@ -25,7 +25,7 @@ class Todo(models.Model):
     dead_line = models.DateTimeField('締め切り', default=timezone.now())
     created_at = models.DateTimeField('日付', auto_now_add=True)  # 投稿日時
     category = models.ManyToManyField(Category, blank=True)  # カテゴリとの連携
-    completed = models.BooleanField('completed', default=False)
+    completed = models.BooleanField('completed', default=False) # 達成済みかどうか
 
     def __str__(self):
         return self.title
